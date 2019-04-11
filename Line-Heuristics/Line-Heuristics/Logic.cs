@@ -11,8 +11,10 @@ namespace Line_Heuristics
     {
         private LinkedList<Point> points;
         private Point rootP, endP;
-        public Logic()
+        private Drawing draw;
+        public Logic(Drawing draw)
         {
+            this.draw = draw;
             points = new LinkedList<Point>();
         }
 
@@ -22,23 +24,20 @@ namespace Line_Heuristics
             if (points.Count == 1)
             {
                 rootP = p;
+                draw.drawCartisan();
+                draw.drawdot(p);
             }
             else if (points.Count == 2)
             {
                 endP = p;
-                drawline(rootP, endP);
+                draw.drawline(rootP, endP, points);
             }
             else
             {
                 mindistance(p, points);
-                drawline(rootP, endP);
+                draw.drawline(rootP, endP, points);
             }
            
-        }
-
-        private void drawline(Point p1, Point p2)
-        {
-
         }
 
         private void mindistance(Point p, LinkedList<Point> points)
