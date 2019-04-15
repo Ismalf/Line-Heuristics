@@ -38,7 +38,7 @@ namespace Line_Heuristics
             {
                 x = int.Parse(txtX.Text);
                 y = int.Parse(txtY.Text);
-                logic.drawline(new Point(x, y));
+                logic.drawline(new Point(x+300, -1*y+200));
                 txtX.Text = "";
                 txtY.Text = "";
             }

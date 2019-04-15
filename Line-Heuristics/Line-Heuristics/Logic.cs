@@ -12,6 +12,7 @@ namespace Line_Heuristics
         private LinkedList<Point> points;
         private Point rootP, endP;
         private Drawing draw;
+
         public Logic(Drawing draw)
         {
             this.draw = draw;
@@ -43,17 +44,22 @@ namespace Line_Heuristics
         private void mindistance(Point p, LinkedList<Point> points)
         {
             float dist = 0.0f;
-            float mindist = 0.0f;
+            float mindist = 1000.0f;
+            Console.WriteLine("calculating");
             foreach (var point in points)
             {
                 if(point != p)
                 {
                     dist = (float)Math.Sqrt((p.X - point.X) ^ 2 - (p.Y - point.Y) ^ 2);
-                    if (mindist == 0.0) mindist = dist;
-                    else if (dist < mindist)
+                    Console.WriteLine("calculating distace");
+                    Console.WriteLine(dist);
+                    Console.WriteLine(point+" "+p);
+                    if (dist < mindist)
                     {
                         mindist = dist;
+                        Console.WriteLine(mindist);
                         Point midpoint = new Point((p.X + point.X) / 2, (p.Y + point.Y) / 2);
+                        Console.WriteLine("midpoint"+midpoint);
                         if (isleft(midpoint, rootP))
                         {
                             endP = rootP;
@@ -68,7 +74,7 @@ namespace Line_Heuristics
 
         private Boolean isleft(Point p1, Point p2)
         {
-            if (p1.X < p2.X)
+            if (p1.X > p2.X)
                 return true;
             else
                 return false;

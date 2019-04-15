@@ -13,27 +13,28 @@ namespace Line_Heuristics
     {
         private Panel pic;
         public Panel Pic { get => pic; set => pic = value; }
-        private Pen pen = new Pen(Color.Black);
+        private Pen pen = new Pen(Color.Black, 4);
         private Graphics canvas;
         private int scaleF = 10;
+        private int offsetx, offsety;
 
         public Drawing(Panel p)
         {
             pic = p;
             canvas = Pic.CreateGraphics();
+            offsetx = Pic.Width / 2;
+            offsety = Pic.Height / 2;
         }
 
         public void drawline(Point p1, Point p2, LinkedList<Point> points)
         {
-            Point p1tmp = new Point((p1.X * scaleF + Pic.Width / 2), (p1.Y * scaleF + Pic.Height / 2));
-            Point p2tmp = new Point((p2.X * scaleF + Pic.Width / 2), (p2.Y * scaleF + Pic.Height / 2));
             canvas.Clear(Color.White);
             drawCartisan();
             foreach (var point in points)
             {
                 drawdot(point);
             }
-            canvas.DrawLine(pen, p1tmp, p2tmp);
+            canvas.DrawLine(pen, p1, p2);
         }
 
         public  void drawCartisan()
@@ -44,7 +45,7 @@ namespace Line_Heuristics
 
         public void drawdot(Point p)
         {
-            canvas.DrawEllipse(pen, p.X, p.Y, 2, 2);
+            canvas.DrawEllipse(pen, p.X, p.Y, 4, 4);
         }
     }
 }
